@@ -142,7 +142,7 @@ enum Menu {
     AddBill,
     ViewBill,
     RemoveBill,
-    UpdateBill
+    UpdateBill,
 }
 
 impl Menu {
@@ -167,17 +167,22 @@ impl Menu {
     }
 }
 
-fn main() {
+fn run_program() -> Option<()> {
     let mut bills = Bills::new();
     loop {
         Menu::show();
-        let input = get_input().expect("no data entered");
+        let input = get_input()?;
         match Menu::from_str(input.as_str()) {
             Some(Menu::AddBill) => menu::add_bill(&mut bills),
             Some(Menu::RemoveBill) => menu::remove_bill(&mut bills),
             Some(Menu::ViewBill) => menu::view_bill(&bills),
             Some(Menu::UpdateBill) => menu::update_bill(&mut bills),
-            None => return,
+            None => break,
         }
     }
+    None
+}
+
+fn main() {
+    run_program();
 }
