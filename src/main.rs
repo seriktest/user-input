@@ -142,7 +142,7 @@ enum Menu {
     AddBill,
     ViewBill,
     RemoveBill,
-    UpdateBill,
+    UpdateBill
 }
 
 impl Menu {
